@@ -1,0 +1,36 @@
+# ----------------------------
+# Large local models
+# ----------------------------
+models/
+models/Xenova/
+models/Xenova/all-MiniLM-L6-v2/
+
+# ----------------------------
+# Temporary / local files
+# ----------------------------
+webpagesd_revive.txt
+cloudflared.deb
+
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+
+# ----------------------------
+# Node / frontend
+# ----------------------------
+node_modules/
+dist/
+build/
+
+# ----------------------------
+# OS junk
+# ----------------------------
+.DS_Store
+Thumbs.db
