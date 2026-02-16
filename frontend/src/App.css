@@ -1,0 +1,715 @@
+/* App.css */
+:root {
+  --bg: #f7f7f8;
+  --panel: #ffffff;
+  --panel2: #fbfbfc;
+  --text: #0f172a;
+  --muted: rgba(15, 23, 42, 0.62);
+  --border: rgba(15, 23, 42, 0.12);
+  --shadow: 0 10px 26px rgba(2, 6, 23, 0.08);
+  --radius: 14px;
+
+  --accent: #10a37f;
+  --accentSoft: rgba(16, 163, 127, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  overflow: hidden; /* ✅ prevents page scroll */
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+}
+
+/* ======================================================
+   FULL SCREEN APP LAYOUT (NO PAGE SCROLLING)
+   ====================================================== */
+.layout {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  background: var(--bg);
+  overflow: hidden; /* ✅ important */
+}
+
+/* ======================================================
+   SIDEBAR (FIXED, INTERNAL SCROLL)
+   ====================================================== */
+.sidebar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+  background: #ffffff; /* ✅ always white */
+  overflow: hidden; /* ✅ prevents sidebar from expanding page */
+}
+
+.sidebarTop {
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel2);
+  flex: 0 0 auto; /* ✅ fixed */
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accentSoft);
+}
+
+.brandTitle {
+  font-weight: 750;
+  letter-spacing: 0.2px;
+}
+
+.brandSub {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ✅ only this part scrolls */
+.chatList {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 10px;
+  background: #ffffff;
+}
+
+.chatItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.chatItem:hover {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.chatItem.active {
+  background: rgba(16, 163, 127, 0.1);
+  border-color: rgba(16, 163, 127, 0.22);
+}
+
+.chatItemMain {
+  min-width: 0;
+  flex: 1;
+}
+
+.chatItemTitle {
+  font-weight: 650;
+  font-size: 14px;
+  color: rgba(15, 23, 42, 0.92);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.chatItemBtns {
+  display: flex;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.chatRenameInput {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  outline: none;
+  background: #fff;
+  color: var(--text);
+  font-weight: 650;
+}
+
+.chatRenameInput:focus {
+  border-color: rgba(16, 163, 127, 0.45);
+  box-shadow: 0 0 0 4px rgba(16, 163, 127, 0.12);
+}
+
+.iconBtn {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(15, 23, 42, 0.45);
+  font-size: 14px;
+  padding: 6px;
+  border-radius: 10px;
+}
+
+.iconBtn:hover {
+  background: rgba(15, 23, 42, 0.06);
+  color: rgba(15, 23, 42, 0.7);
+}
+
+/* ======================================================
+   MAIN (FIXED HEADER + SCROLLABLE CHAT + FIXED COMPOSER)
+   ====================================================== */
+.main {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 56px 1fr;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  flex: 0 0 auto;
+}
+
+.activeTitle {
+  font-weight: 750;
+  color: rgba(15, 23, 42, 0.9);
+}
+
+.chatArea {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ✅ only this scrolls on the right */
+.chatScroll {
+  overflow-y: auto;
+  padding: 18px 18px 10px;
+  background: var(--bg);
+}
+
+.msgRow {
+  display: flex;
+  gap: 12px;
+  padding: 10px 6px;
+  align-items: flex-start;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.05);
+  border: 1px solid var(--border);
+  flex: 0 0 auto;
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.bubbleWrap {
+  width: 100%;
+}
+
+.bubble {
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04);
+}
+
+.msgRow.user .bubble {
+  background: rgba(16, 163, 127, 0.08);
+  border-color: rgba(16, 163, 127, 0.22);
+}
+
+.meta {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Markdown */
+.content {
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+.content p {
+  margin: 0.35em 0;
+}
+
+.content h1,
+.content h2,
+.content h3 {
+  margin: 0.6em 0 0.4em;
+  line-height: 1.25;
+}
+.content h1 {
+  font-size: 20px;
+}
+.content h2 {
+  font-size: 18px;
+}
+.content h3 {
+  font-size: 16px;
+}
+
+.content ul,
+.content ol {
+  margin: 0.35em 0 0.35em 1.2em;
+}
+.content li {
+  margin: 0.2em 0;
+}
+
+.content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 0.95em;
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  padding: 1px 6px;
+  border-radius: 8px;
+}
+
+.content pre {
+  margin: 0.5em 0;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  overflow: auto;
+}
+
+.content pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.content blockquote {
+  margin: 0.6em 0;
+  padding: 0.6em 0.9em;
+  border-left: 3px solid rgba(15, 23, 42, 0.18);
+  background: rgba(15, 23, 42, 0.03);
+  border-radius: 10px;
+  color: rgba(15, 23, 42, 0.85);
+}
+
+/* ✅ NEW: inline typing indicator INSIDE the streaming assistant bubble */
+.inlineTyping {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 8px;
+  opacity: 0.7;
+}
+
+.inlineTyping .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.45);
+  animation: typingBounce 1s infinite ease-in-out;
+}
+
+.inlineTyping .dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.inlineTyping .dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes typingBounce {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Composer (fixed at bottom of right pane) */
+.composer {
+  width: 100%;
+  padding: 10px 18px 14px;
+  border-top: 1px solid var(--border);
+  background: rgba(247, 247, 248, 0.85);
+  backdrop-filter: blur(8px);
+  flex: 0 0 auto;
+}
+
+.fileInputHidden {
+  display: none;
+}
+
+/* ✅ Optional file chips (demo-only) */
+.fileChips {
+  max-width: 980px;
+  margin: 0 auto 8px;
+  padding: 0 6px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fileChip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel);
+  box-shadow: 0 4px 10px rgba(2, 6, 23, 0.04);
+}
+
+.fileName {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: rgba(15, 23, 42, 0.85);
+}
+
+.fileRemove {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(15, 23, 42, 0.45);
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+
+.fileRemove:hover {
+  background: rgba(15, 23, 42, 0.06);
+  color: rgba(15, 23, 42, 0.7);
+}
+
+.composerInner {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 10px 10px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.input {
+  width: 100%;
+  resize: none;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 6px 8px;
+  min-height: 38px;
+  max-height: 160px;
+}
+
+/* ✅ Attach icon button (matches your UI) */
+.attachBtn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.attachBtn:hover {
+  background: rgba(15, 23, 42, 0.05);
+}
+
+.attachBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.error {
+  max-width: 980px;
+  margin: 0 auto 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: rgba(127, 29, 29, 0.92);
+}
+
+/* Buttons */
+.btn {
+  border: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.02);
+  color: rgba(15, 23, 42, 0.9);
+  border-radius: 12px;
+  padding: 9px 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: rgba(15, 23, 42, 0.05);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn.primary {
+  border-color: rgba(16, 163, 127, 0.35);
+  background: rgba(16, 163, 127, 0.14);
+}
+
+.btn.primary:hover {
+  background: rgba(16, 163, 127, 0.2);
+}
+
+.btn.full {
+  width: 100%;
+}
+
+/* NOTE:
+   ✅ We keep your pulse/thinking CSS, but the UI no longer renders the separate Thinking row.
+   You can delete these if you want, but leaving them doesn't hurt. */
+.thinking {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(16, 163, 127, 0.85);
+  box-shadow: 0 0 0 0 rgba(16, 163, 127, 0.35);
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 163, 127, 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(16, 163, 127, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 163, 127, 0);
+  }
+}
+
+/* Welcome panel */
+/* ✅ NEW: starter actions for Time2Reflect */
+.starterGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.starterBtn {
+  text-align: left;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.02);
+  color: rgba(15, 23, 42, 0.92);
+  cursor: pointer;
+}
+
+.starterBtn:hover {
+  background: rgba(15, 23, 42, 0.05);
+}
+
+.starterBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.starterTitle {
+  font-weight: 750;
+  margin-bottom: 6px;
+}
+
+.starterDesc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+/* Responsive: 1 column on small screens */
+@media (max-width: 720px) {
+  .starterGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.welcomeWrap {
+  max-width: 980px;
+  margin: 26px auto 10px;
+  padding: 0 6px;
+}
+
+.welcomeCard {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 22px 18px;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+}
+
+.welcomeAvatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.welcomeTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: rgba(15, 23, 42, 0.92);
+}
+
+.welcomeDesc {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.promptGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.promptBtn {
+  text-align: left;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.02);
+  color: rgba(15, 23, 42, 0.92);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.promptBtn:hover {
+  background: rgba(15, 23, 42, 0.05);
+}
+
+.promptBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 240px 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    display: none;
+  }
+  .promptGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.attachBtn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.02);
+  padding: 0; /* important so the icon centers nicely */
+}
+
+.attachBtn:hover {
+  background: rgba(15, 23, 42, 0.05);
+}
+
+/* ✅ NEW: make the PNG icon the same “size like before” */
+.attachIcon {
+  width: 14px;
+  height: 14px;
+  display: block;
+  object-fit: contain;
+  opacity: 0.75;
+}
+
+.attachBtn:hover .attachIcon {
+  opacity: 0.95;
+}
